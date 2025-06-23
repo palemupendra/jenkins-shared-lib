@@ -18,6 +18,9 @@ def call(Map config = [:]) {
                         "-Dsonar.login=%SONAR_TOKEN%"
 
                     echo "Running SonarQube command: ${sonarCmd}"
-                    bat "\"${sonarCmd}\""  // ✅ important: wrap entire command in quotes
+                    bat "\"${sonarCmd}\""
                 }
             }
+        }
+    }
+}
