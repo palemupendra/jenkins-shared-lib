@@ -5,20 +5,21 @@ def call(Map config = [:]) {
     def sonarToken = config.sonarToken ?: error("sonarToken (secret text credential ID) is required")
     def sourceDir = config.sourceDir ?: '.'
 
-    stage('SonarQube Analysis') {
-    withCredentials([string(credentialsId: sonarToken, variable: 'SONAR_TOKEN')]) {
+stage('SonarQube Analysis') {
+    withCredentials([string(credentialsId: 'sonar-token-id', variable: 'SONAR_TOKEN')]) {
         withEnv([
-            "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}/.sonar-temp"
+            "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"
         ]) {
             bat """
-                sonar-scanner.bat ^
-                    -Dsonar.projectKey=${projectKey} ^
-                    -Dsonar.projectName=${projectName} ^
-                    -Dsonar.sources=${sourceDir} ^
-                    -Dsonar.host.url=${sonarHost} ^
+                C:\\SonarScanner\\bin\\sonar-scanner.bat ^
+                    -Dsonar.projectKey=myproject ^
+                    -Dsonar.projectName=myproject ^
+                    -Dsonar.sources=. ^
+                    -Dsonar.host.url=http://localhost:9000 ^
                     -Dsonar.login=%SONAR_TOKEN%
             """
         }
     }
 }
+
 }
