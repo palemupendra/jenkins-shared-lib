@@ -21,10 +21,11 @@ pipeline {
             steps {
                 runSonarAnalysis(
                     projectKey: 'myproject',
-                    projectName: 'myproject',
-                    sonarHost: 'http://localhost:9000',
-                    sonarToken: 'sonar-token-id',       // Jenkins Secret Text credential ID
-                    sourceDir: '.'                       // Optional, default is '.'
+    projectName: 'My Project',
+    sonarHost: 'http://localhost:9000',
+    sonarToken: 'sonar-token-id',
+    sourceDir: '.',
+    scannerPath: 'C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat'                  // Optional, default is '.'
                 )
             }
         }
