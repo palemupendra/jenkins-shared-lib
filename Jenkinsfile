@@ -19,7 +19,7 @@ pipeline {
         }
          stage('Sonar Analysis') {
             steps {
-               runSonarAnalysis(
+              runSonarAnalysis(
     projectKey: 'myproject',
     projectName: 'myproject',
     sonarHost: 'http://localhost:9000',
@@ -27,6 +27,7 @@ pipeline {
     sourceDir: '.',
     scannerPath: 'C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat'
 )
+
 
             }
         }
