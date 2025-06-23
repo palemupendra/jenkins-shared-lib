@@ -6,19 +6,19 @@ def call(Map config = [:]) {
     def sourceDir = config.sourceDir ?: '.'
 
     stage('SonarQube Analysis') {
-        withCredentials([string(credentialsId: sonarToken, variable: 'SONAR_TOKEN')]) {
-            withEnv([
-                "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}/.sonar-temp"
-            ]) {
-                bat """
-                    sonar-scanner.bat ^
-                        -Dsonar.projectKey=${projectKey} ^
-                        -Dsonar.projectName=${projectName} ^
-                        -Dsonar.sources=${sourceDir} ^
-                        -Dsonar.host.url=${sonarHost} ^
-                        -Dsonar.login=%SONAR_TOKEN%
-                """
-            }
+    withCredentials([string(credentialsId: sonarToken, variable: 'SONAR_TOKEN')]) {
+        withEnv([
+            "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}/.sonar-temp"
+        ]) {
+            bat """
+                sonar-scanner.bat ^
+                    -Dsonar.projectKey=${projectKey} ^
+                    -Dsonar.projectName=${projectName} ^
+                    -Dsonar.sources=${sourceDir} ^
+                    -Dsonar.host.url=${sonarHost} ^
+                    -Dsonar.login=%SONAR_TOKEN%
+            """
         }
     }
+}
 }

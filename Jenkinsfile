@@ -23,7 +23,7 @@ pipeline {
                     projectKey: 'myproject',
                     projectName: 'myproject',
                     sonarHost: 'http://localhost:9000',
-                    sonarToken: 'sqp_cff03050c4b1df3e96eb1b931a6062df2de5f68d',       // Jenkins Secret Text credential ID
+                    sonarToken: 'sonar-token-id',       // Jenkins Secret Text credential ID
                     sourceDir: '.'                       // Optional, default is '.'
                 )
             }
