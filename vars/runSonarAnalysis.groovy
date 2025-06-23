@@ -10,8 +10,7 @@ def call(Map config = [:]) {
         withCredentials([string(credentialsId: sonarTokenId, variable: 'SONAR_TOKEN')]) {
             withEnv(["SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"]) {
                 script {
-                    def sonarCmd = "${scannerPath} " +
-                    bat "\"C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat\" " +
+                    def sonarCmd = "\"${scannerPath}\" " +
                         "-Dsonar.projectKey=${projectKey} " +
                         "-Dsonar.projectName=${projectName} " +
                         "-Dsonar.sources=${sourceDir} " +
@@ -19,7 +18,7 @@ def call(Map config = [:]) {
                         "-Dsonar.login=%SONAR_TOKEN%"
 
                     echo "Running SonarQube command: ${sonarCmd}"
-                    bat "\"${sonarCmd}\""
+                    bat sonarCmd
                 }
             }
         }
