@@ -11,6 +11,7 @@ def call(Map config = [:]) {
             withEnv(["SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"]) {
                 script {
                     def sonarCmd = "${scannerPath} " +
+                    bat "\"C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat\" " +
                         "-Dsonar.projectKey=${projectKey} " +
                         "-Dsonar.projectName=${projectName} " +
                         "-Dsonar.sources=${sourceDir} " +
