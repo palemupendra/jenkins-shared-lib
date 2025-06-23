@@ -11,7 +11,7 @@ stage('SonarQube Analysis') {
             "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"
         ]) {
             bat """
-                C:\\SonarScanner\\bin\\sonar-scanner.bat ^
+                C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat ^
                     -Dsonar.projectKey=myproject ^
                     -Dsonar.projectName=myproject ^
                     -Dsonar.sources=. ^
@@ -21,5 +21,6 @@ stage('SonarQube Analysis') {
         }
     }
 }
+
 
 }
