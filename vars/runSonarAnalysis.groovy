@@ -10,17 +10,19 @@ stage('SonarQube Analysis') {
         withEnv([
             "SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"
         ]) {
-            bat """
-                C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat ^
-                    -Dsonar.projectKey=myproject ^
-                    -Dsonar.projectName=myproject ^
-                    -Dsonar.sources=. ^
-                    -Dsonar.host.url=http://localhost:9000 ^
-                    -Dsonar.login=%SONAR_TOKEN%
-            """
+            script {
+                def projectKey = "myproject"
+                def projectName = "myproject"
+                def sourceDir = "."
+                def sonarHost = "http://localhost:9000"
+                def scannerPath = "C:\\Temp\\sonar-scanner-5.0.1.3006-windows\\bin\\sonar-scanner.bat"
+
+                bat "\"${scannerPath}\" -Dsonar.projectKey=${projectKey} -Dsonar.projectName=${projectName} -Dsonar.sources=${sourceDir} -Dsonar.host.url=${sonarHost} -Dsonar.login=%SONAR_TOKEN%"
+            }
         }
     }
 }
+
 
 
 }
