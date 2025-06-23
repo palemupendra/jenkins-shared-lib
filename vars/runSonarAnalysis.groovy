@@ -10,17 +10,14 @@ def call(Map config = [:]) {
         withCredentials([string(credentialsId: sonarTokenId, variable: 'SONAR_TOKEN')]) {
             withEnv(["SONAR_SCANNER_OPTS=-Djava.io.tmpdir=${env.WORKSPACE}\\.sonar-temp"]) {
                 script {
-                    def sonarCmd = "\"${scannerPath}\" " +
+                    def sonarCmd = "${scannerPath} " +
                         "-Dsonar.projectKey=${projectKey} " +
                         "-Dsonar.projectName=${projectName} " +
                         "-Dsonar.sources=${sourceDir} " +
                         "-Dsonar.host.url=${sonarHost} " +
                         "-Dsonar.login=%SONAR_TOKEN%"
 
-                    echo "Running SonarQube command: ${sonarCmd}"  // Optional debug
-                    bat sonarCmd
+                    echo "Running SonarQube command: ${sonarCmd}"
+                    bat "\"${sonarCmd}\""  // ✅ important: wrap entire command in quotes
                 }
             }
-        }
-    }
-}
