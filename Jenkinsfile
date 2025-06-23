@@ -21,7 +21,7 @@ pipeline {
             steps {
                 runSonarAnalysis(
                     projectKey: 'myproject',
-    projectName: 'My Project',
+    projectName: 'myproject',
     sonarHost: 'http://localhost:9000',
     sonarToken: 'sonar-token-id',
     sourceDir: '.',
